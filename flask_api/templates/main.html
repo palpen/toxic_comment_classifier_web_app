@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+/* This controls th style of the text area where user provide input */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+/* This controls the style of the result */
+div {
+    background-color: lightgrey;
+    width: 300px;
+    border: 5px solid green;
+    padding: 25px;
+    margin: 25px;
+}
+
+</style>
+</head>
+<body>
+
+<p><strong>Toxic Comment Classifier:</strong> This application uses machine learning to evaluate whether the provided comment is toxic. If it is, it tells you the toxic characteristics of the comment</p>
+
+<form method="POST">
+  <textarea name="text">Type comment here then press "submit" </textarea>
+  <input type="submit">
+</form>
+
+<div>
+Comment submitted: <br />
+
+<i>{% if text %}{{ text }}{% else %}Nothing{% endif %}</i> <br />
+
+<br />
+<br />
+
+Result: <br />
+{{ processed_text }}
+</div>
+
+
+</body>
+</html>
+
