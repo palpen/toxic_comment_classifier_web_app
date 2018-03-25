@@ -58,8 +58,19 @@ def my_form_post():
     comment_term_doc = tfidf_model.transform([text])
 
     pred_identity_hate = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1]
+    pred_insult = logistic_insult_model.predict_proba(comment_term_doc)[:, 1]
+    pred_obscene = logistic_obscene_model.predict_proba(comment_term_doc)[:, 1]
+    pred_severe_toxic = logistic_severe_toxic_model.predict_proba(comment_term_doc)[:, 1]
+    pred_threat = logistic_threat_model.predict_proba(comment_term_doc)[:, 1]
+    pred_toxic = logistic_toxic_model.predict_proba(comment_term_doc)[:, 1]
 
-    return render_template('main.html', text=text, processed_text=pred_identity_hate)
+    return render_template('main.html', text=text,
+                           pred_identity_hate=pred_identity_hate,
+                           pred_insult=pred_insult,
+                           pred_obscene=pred_obscene,
+                           pred_severe_toxic=pred_severe_toxic,
+                           pred_threat=pred_threat,
+                           pred_toxic=pred_toxic)
 
 
 if __name__ == '__main__':
