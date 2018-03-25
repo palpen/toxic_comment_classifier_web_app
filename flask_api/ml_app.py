@@ -57,20 +57,26 @@ def my_form_post():
 
     comment_term_doc = tfidf_model.transform([text])
 
-    pred_identity_hate = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1]
-    pred_insult = logistic_insult_model.predict_proba(comment_term_doc)[:, 1]
-    pred_obscene = logistic_obscene_model.predict_proba(comment_term_doc)[:, 1]
-    pred_severe_toxic = logistic_severe_toxic_model.predict_proba(comment_term_doc)[:, 1]
-    pred_threat = logistic_threat_model.predict_proba(comment_term_doc)[:, 1]
-    pred_toxic = logistic_toxic_model.predict_proba(comment_term_doc)[:, 1]
+    dict_preds = {}
+
+    dict_preds['pred_identity_hate'] = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1][0]
+    dict_preds['pred_insult'] = logistic_insult_model.predict_proba(comment_term_doc)[:, 1][0]
+    dict_preds['pred_obscene'] = logistic_obscene_model.predict_proba(comment_term_doc)[:, 1][0]
+    dict_preds['pred_severe_toxic'] = logistic_severe_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
+    dict_preds['pred_threat'] = logistic_threat_model.predict_proba(comment_term_doc)[:, 1][0]
+    dict_preds['pred_toxic'] = logistic_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
+
+    for k in dict_preds:
+        perc = dict_preds[k] * 100
+        dict_preds[k] = "{0:.2f}%".format(perc)
 
     return render_template('main.html', text=text,
-                           pred_identity_hate=pred_identity_hate,
-                           pred_insult=pred_insult,
-                           pred_obscene=pred_obscene,
-                           pred_severe_toxic=pred_severe_toxic,
-                           pred_threat=pred_threat,
-                           pred_toxic=pred_toxic)
+                           pred_identity_hate=dict_preds['pred_identity_hate'],
+                           pred_insult=dict_preds['pred_insult'],
+                           pred_obscene=dict_preds['pred_obscene'],
+                           pred_severe_toxic=dict_preds['pred_severe_toxic'],
+                           pred_threat=dict_preds['pred_threat'],
+                           pred_toxic=dict_preds['pred_toxic'])
 
 
 if __name__ == '__main__':
