@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from sklearn.externals import joblib
-from utils import tokenize
+from utils import tokenize  # custom tokenizer required for tfidf model loaded in load_tfidf_model()
 
 app = Flask(__name__)
 
@@ -10,14 +10,14 @@ tfidf_model = None
 
 
 def load_tfidf_model():
-
+    """
+        how to transform a single document
+        tfidfvectorizer.transform(['the quick brown fox jumped over the lazy dogs'])
+        https://stackoverflow.com/questions/20132070/using-sklearns-tfidfvectorizer-transform
+    """
     global tfidf_model
 
     tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-
-    # how to transform a single document
-    # tfidfvectorizer.transform(['the quick brown fox jumped over the lazy dogs'])
-    # https://stackoverflow.com/questions/20132070/using-sklearns-tfidfvectorizer-transform
 
 
 def load_nbsvm_models():
@@ -52,31 +52,25 @@ def my_form_post():
         Takes the comment submitted by the user, does some stuff to it,
         then returns it and renders it in the my-form.html template
     """
+
     text = request.form['text']
 
-    processed_text = text.upper()
-
-    # clean using tfidf
-    # tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-    # processed_text = tfidf_model
-
     comment_term_doc = tfidf_model.transform([text])
-    processed_text = comment_term_doc.toarray()
 
-    # predict using model
+    pred_identity_hate = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1]
 
-    return render_template('main.html', text=text, processed_text=processed_text)
+    return render_template('main.html', text=text, processed_text=pred_identity_hate)
 
 
 if __name__ == '__main__':
 
     try:
-        load_tfidf_model()  # WHY ISNT THIS LOADING THE MODEL????
-        # load_nbsvm_models()
-        print("Model loaded")
+        load_tfidf_model()
+        load_nbsvm_models()
+        print("Models loaded")
 
     except Exception as e:
         print("Model loading failed")
         print(str(e))
 
-    app.run()
+    app.run(debug=True)
