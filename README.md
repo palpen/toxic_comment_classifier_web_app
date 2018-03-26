@@ -17,6 +17,6 @@ python ml_app.py
 - [] Refactor `NBSVM.py` and place in a separate file called `utils.py` inside `flask_api` folder
 - [] Deploy web app
 - [] Fix view function names
+- [] Add page explaining details of algorithm
 - [X] Create environment yml file (see requirements)
 - [X] Implement view functions that classifies input comment
-
