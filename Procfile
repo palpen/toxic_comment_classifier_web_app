@@ -1,1 +1,1 @@
-web: gunicorn ml_app:app --log-file=-
+web: gunicorn ml_app:app -w 1 --log-file=-
