@@ -1,6 +1,9 @@
 # Toxic Comment Classification Web App
 Flask-based web application for a machine learning model that classifies toxic comments
 
+### Data used for training
+[Kaggle Toxic Comment Classification Challenge](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge)
+
 ### How to run locally
 ```
 export FLASK_APP=hello.py
@@ -9,7 +12,7 @@ python ml_app.py
 ```
 
 ### Very useful references
-- [Deploying a Flask app on Heroky](https://github.com/datademofun/heroku-basic-flask)
+- [Deploying a Flask app on Heroku](https://github.com/datademofun/heroku-basic-flask) (main reference used for deployment)
 - [Building a simple Keras deep learning REST API](https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html)
 - [Flask API for scikit-learn](https://github.com/amirziai/sklearnflask)
 
