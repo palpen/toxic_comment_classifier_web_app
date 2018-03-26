@@ -1,10 +1,18 @@
 from flask import Flask, request, render_template
 from sklearn.externals import joblib
 from utils import tokenize  # custom tokenizer required for tfidf model loaded in load_tfidf_model()
+import re
+import string
 
 app = Flask(__name__)
 
 models_directory = 'models'
+
+
+def tokenize(s):
+    regex = re.compile('[%s]' % re.escape(string.punctuation))
+    out = regex.sub(' ', s).split()
+    return out
 
 
 def nbsvm_models():
