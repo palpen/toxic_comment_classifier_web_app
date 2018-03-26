@@ -17,9 +17,10 @@ python ml_app.py
 - [Flask API for scikit-learn](https://github.com/amirziai/sklearnflask)
 
 ### To do:
-- [] Deploy web app
+- [] Create environment file with versions, test all code, redo heroku deployment from scratch
 - [] Fix view function names
 - [] Add page explaining details of algorithm
+- [] Implement deep learning based approach for better performance
+- [] Deploy
 - [X] Refactor code used for training model and add to repository
-- [X] Create environment yml file (see requirements)
 - [X] Implement view functions that classifies input comment
