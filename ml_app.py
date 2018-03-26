@@ -9,6 +9,7 @@ models_directory = 'models'
 
 @app.before_first_request
 def nbsvm_models():
+    # from utils import tokenize
 
     global tfidf_model
     global logistic_identity_hate_model
