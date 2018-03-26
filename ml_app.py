@@ -1,27 +1,30 @@
 from flask import Flask, request, render_template
 from sklearn.externals import joblib
 from utils import tokenize  # custom tokenizer required for tfidf model loaded in load_tfidf_model()
-import re
-import string
 
 app = Flask(__name__)
 
 models_directory = 'models'
 
 
-def tokenize(s):
-    regex = re.compile('[%s]' % re.escape(string.punctuation))
-    out = regex.sub(' ', s).split()
-    return out
+@app.before_first_request
+def nbsvm_models():
 
+    global tfidf_model
+    global logistic_identity_hate_model
+    global logistic_insult_model
+    global logistic_obscene_model
+    global logistic_severe_toxic_model
+    global logistic_threat_model
+    global logistic_toxic_model
 
-tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
-logistic_insult_model = joblib.load('models/logistic_insult.pkl')
-logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
-logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
-logistic_threat_model = joblib.load('models/logistic_threat.pkl')
-logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
+    tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
+    logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
+    logistic_insult_model = joblib.load('models/logistic_insult.pkl')
+    logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
+    logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
+    logistic_threat_model = joblib.load('models/logistic_threat.pkl')
+    logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
 
 
 @app.route('/')
