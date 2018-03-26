@@ -35,8 +35,7 @@ def my_form():
 @app.route('/', methods=['POST'])
 def my_form_post():
     """
-        Takes the comment submitted by the user, does some stuff to it,
-        then returns it and renders it in the my-form.html template
+        Takes the comment submitted by the user, apply TFIDF trained vectorizer to it, predict using trained models
     """
 
     text = request.form['text']
