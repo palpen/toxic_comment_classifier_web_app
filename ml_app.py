@@ -6,39 +6,26 @@ app = Flask(__name__)
 
 models_directory = 'models'
 
-tfidf_model = None
 
-
-def load_tfidf_model():
-    """
-        how to transform a single document
-        tfidfvectorizer.transform(['the quick brown fox jumped over the lazy dogs'])
-        https://stackoverflow.com/questions/20132070/using-sklearns-tfidfvectorizer-transform
-    """
+def nbsvm_models():
     global tfidf_model
+    global logistic_identity_hate_model
+    global logistic_insult_model
+    global logistic_obscene_model
+    global logistic_severe_toxic_model
+    global logistic_threat_model
+    global logistic_toxic_model
 
     tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-
-
-def load_nbsvm_models():
-
-    global logistic_identity_hate_model
     logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
-
-    global logistic_insult_model
     logistic_insult_model = joblib.load('models/logistic_insult.pkl')
-
-    global logistic_obscene_model
     logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
-
-    global logistic_severe_toxic_model
     logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
-
-    global logistic_threat_model
     logistic_threat_model = joblib.load('models/logistic_threat.pkl')
-
-    global logistic_toxic_model
     logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
+
+
+nbsvm_models()
 
 
 @app.route('/')
@@ -80,14 +67,5 @@ def my_form_post():
 
 
 if __name__ == '__main__':
-
-    try:
-        load_tfidf_model()
-        load_nbsvm_models()
-        print("Models loaded")
-
-    except Exception as e:
-        print("Model loading failed")
-        print(str(e))
 
     app.run(debug=True)
