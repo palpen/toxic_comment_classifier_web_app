@@ -2,10 +2,11 @@ from flask import Flask, request, render_template
 from utils import tokenize  # tokenizer used when training TFIDF vectorizer
 import pickle
 import os
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
 basepath = os.path.abspath("./toxic_comment_classifier_web_app")  # important for server to find models folder
-
+# basepath = os.path.abspath(".")  # important for server to find models folder
 # models_directory = 'models'
 
 
