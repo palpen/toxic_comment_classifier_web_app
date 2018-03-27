@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template
 from utils import tokenize  # custom tokenizer required for tfidf model loaded in load_tfidf_model()
 import pickle
+import os
 
 app = Flask(__name__)
+basepath = os.path.abspath(".")
 
 # models_directory = 'models'
 
