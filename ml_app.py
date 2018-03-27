@@ -7,25 +7,25 @@ app = Flask(__name__)
 models_directory = 'models'
 
 
-@app.before_first_request
-def nbsvm_models():
-    # from utils import tokenize
+# @app.before_first_request
+# def nbsvm_models():
+#     # from utils import tokenize
 
-    global tfidf_model
-    global logistic_identity_hate_model
-    global logistic_insult_model
-    global logistic_obscene_model
-    global logistic_severe_toxic_model
-    global logistic_threat_model
-    global logistic_toxic_model
+#     global tfidf_model
+#     global logistic_identity_hate_model
+#     global logistic_insult_model
+#     global logistic_obscene_model
+#     global logistic_severe_toxic_model
+#     global logistic_threat_model
+#     global logistic_toxic_model
 
-    tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-    logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
-    logistic_insult_model = joblib.load('models/logistic_insult.pkl')
-    logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
-    logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
-    logistic_threat_model = joblib.load('models/logistic_threat.pkl')
-    logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
+tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
+logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
+logistic_insult_model = joblib.load('models/logistic_insult.pkl')
+logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
+logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
+logistic_threat_model = joblib.load('models/logistic_threat.pkl')
+logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
 
 
 @app.route('/')
