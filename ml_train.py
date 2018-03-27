@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.externals import joblib
 from sklearn.linear_model import LogisticRegression
+import pickle
 
 from utils import tokenize
 
@@ -36,10 +37,15 @@ if __name__ == '__main__':
     train_term_doc = tfidfvectorizer.fit_transform(train[COMMENT])
     x = train_term_doc
 
-    joblib.dump(tfidfvectorizer, 'models/tfidf_vectorizer_train.pkl')
+    # joblib.dump(tfidfvectorizer, 'models/tfidf_vectorizer_train.pkl')
+    with open('models/tfidf_vectorizer_train.pkl', 'wb') as tfidf_file:
+        pickle.dump(tfidfvectorizer, tfidf_file)
 
     print("Fit logistic regression for each class...")
     for i, j in enumerate(label_cols):
         print("Fitting:", j)
         model = fit_logistic(x, train[j])
-        joblib.dump(model, 'models/logistic_{}.pkl'.format(j))
+
+        # joblib.dump(model, 'models/logistic_{}.pkl'.format(j))
+        with open('models/logistic_{}.pkl'.format(j), 'wb') as lg_file:
+            pickle.dump(model, lg_file)

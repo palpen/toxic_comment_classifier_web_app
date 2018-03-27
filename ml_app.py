@@ -1,10 +1,10 @@
 from flask import Flask, request, render_template
-from sklearn.externals import joblib
 from utils import tokenize  # custom tokenizer required for tfidf model loaded in load_tfidf_model()
+import pickle
 
 app = Flask(__name__)
 
-models_directory = 'models'
+# models_directory = 'models'
 
 
 # @app.before_first_request
@@ -19,13 +19,20 @@ models_directory = 'models'
 #     global logistic_threat_model
 #     global logistic_toxic_model
 
-tfidf_model = joblib.load('{}/tfidf_vectorizer_train.pkl'.format(models_directory))
-logistic_identity_hate_model = joblib.load('models/logistic_identity_hate.pkl')
-logistic_insult_model = joblib.load('models/logistic_insult.pkl')
-logistic_obscene_model = joblib.load('models/logistic_obscene.pkl')
-logistic_severe_toxic_model = joblib.load('models/logistic_severe_toxic.pkl')
-logistic_threat_model = joblib.load('models/logistic_threat.pkl')
-logistic_toxic_model = joblib.load('models/logistic_toxic.pkl')
+with open('models/tfidf_vectorizer_train.pkl', 'rb') as tfidf_file:
+        tfidf_model = pickle.load(tfidf_file)
+with open('models/logistic_identity_hate.pkl', 'rb') as logistic_identity_hate_file:
+    logistic_identity_hate_model = pickle.load(logistic_identity_hate_file)
+with open('models/logistic_insult.pkl', 'rb') as logistic_insult_file:
+    logistic_insult_model = pickle.load(logistic_insult_file)
+with open('models/logistic_obscene.pkl', 'rb') as logistic_obscene_file:
+    logistic_obscene_model = pickle.load(logistic_obscene_file)
+with open('models/logistic_severe_toxic.pkl', 'rb') as logistic_severe_toxic_file:
+    logistic_severe_toxic_model = pickle.load(logistic_severe_toxic_file)
+with open('models/logistic_threat.pkl', 'rb') as logistic_threat_file:
+    logistic_threat_model = pickle.load(logistic_threat_file)
+with open('models/logistic_toxic.pkl', 'rb') as logistic_toxic_file:
+    logistic_toxic_model = pickle.load(logistic_toxic_file)
 
 
 @app.route('/')
