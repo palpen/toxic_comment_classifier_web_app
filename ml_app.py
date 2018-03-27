@@ -19,19 +19,19 @@ app = Flask(__name__)
 #     global logistic_threat_model
 #     global logistic_toxic_model
 
-with open('models/tfidf_vectorizer_train.pkl', 'rb') as tfidf_file:
+with open('/models/tfidf_vectorizer_train.pkl', 'rb') as tfidf_file:
         tfidf_model = pickle.load(tfidf_file)
-with open('models/logistic_identity_hate.pkl', 'rb') as logistic_identity_hate_file:
+with open('/models/logistic_identity_hate.pkl', 'rb') as logistic_identity_hate_file:
     logistic_identity_hate_model = pickle.load(logistic_identity_hate_file)
-with open('models/logistic_insult.pkl', 'rb') as logistic_insult_file:
+with open('/models/logistic_insult.pkl', 'rb') as logistic_insult_file:
     logistic_insult_model = pickle.load(logistic_insult_file)
-with open('models/logistic_obscene.pkl', 'rb') as logistic_obscene_file:
+with open('/models/logistic_obscene.pkl', 'rb') as logistic_obscene_file:
     logistic_obscene_model = pickle.load(logistic_obscene_file)
-with open('models/logistic_severe_toxic.pkl', 'rb') as logistic_severe_toxic_file:
+with open('/models/logistic_severe_toxic.pkl', 'rb') as logistic_severe_toxic_file:
     logistic_severe_toxic_model = pickle.load(logistic_severe_toxic_file)
-with open('models/logistic_threat.pkl', 'rb') as logistic_threat_file:
+with open('/models/logistic_threat.pkl', 'rb') as logistic_threat_file:
     logistic_threat_model = pickle.load(logistic_threat_file)
-with open('models/logistic_toxic.pkl', 'rb') as logistic_toxic_file:
+with open('/models/logistic_toxic.pkl', 'rb') as logistic_toxic_file:
     logistic_toxic_model = pickle.load(logistic_toxic_file)
 
 
